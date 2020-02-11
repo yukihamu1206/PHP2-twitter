@@ -14,3 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('signup','Auth\AuthController@getRegister')->name('signup.get');
+Route::post('signup','Auth\AuthController@postRegister')->name('signup.post');
+
+Route::get('login','Auth\AuthCotroller@getLogin')->name('login.get');
+Route::post('login','Auth\AuthController@postlogin')->name('login.post');
+Route::get('logout','Auth\AuthController@getLogout')->name('logout.get');
+// ルーティングのグループを作って['middleware' => 'auth']でログイン認証確認
+Route::group(['middleware' => 'auth'],function(){
+    Route::resource('users','UsersController',['ouly' =>['index','show']]);
+});

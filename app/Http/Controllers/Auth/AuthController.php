@@ -1,5 +1,5 @@
 <?php
-
+// ユーザ登録とログイン認証のための Controller
 namespace App\Http\Controllers\Auth;
 
 use App\User;
@@ -22,6 +22,9 @@ class AuthController extends Controller
     */
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    protected $redirectTo = '/';
+    protected $loginPath = '/login';
+    
 
     /**
      * Create a new authentication controller instance.
@@ -30,6 +33,8 @@ class AuthController extends Controller
      */
     public function __construct()
     {
+        // getLogoutアクション以外では、ログインしていない必要がある。
+        // 指定のリダイレクト先にとばされる。
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
@@ -40,6 +45,7 @@ class AuthController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
+    // バリデーション
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
