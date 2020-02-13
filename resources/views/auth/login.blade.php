@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             
-        {!! Form::open(['route' => 'login.post'}) !!}
+        {!! Form::open(['route' => 'login.post']) !!}
             <div class="form-group">
                 {!! Form::label('email','Email') !!}
                 {!! Form::email('email',old('email'),['class' => 'form-control']) !!}
@@ -19,7 +19,7 @@
                 {!! Form::password('password',['class' => 'form-control']) !!}
             </div>
             
-            {!! Form::submit('Log in'),['class' => 'btn btn-primary btn-bloc']) !!}
+            {!! Form::submit('Log in',['class' => 'btn btn-primary btn-bloc']) !!}
             
         {!! Form::close() !!}
         
