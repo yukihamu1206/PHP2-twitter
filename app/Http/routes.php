@@ -20,7 +20,14 @@ Route::get('login','Auth\AuthController@getLogin')->name('login.get');
 Route::post('login','Auth\AuthController@postlogin')->name('login.post');
 Route::get('logout','Auth\AuthController@getLogout')->name('logout.get');
 // ルーティングのグループを作って['middleware' => 'auth']でログイン認証確認
-Route::group(['middleware' => 'auth'],function(){
-    Route::resource('users','UsersController',['ouly' =>['index','show']]);
+Route::group(['middleware' => 'auth'], function(){
+   Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
+     Route::group(['prefix' => 'users/{id}'], function () { 
+        Route::post('follow','UserFollowController@store')->name('user.follow');
+        Route::delete('unfllow','UserFollowController@destroy')->name('user.unfollow');
+        Route::get('followings','UsersController@followings')->name('users.followings');
+        Route::get('followers','UsersController@followers')->name('users.followers');
+    });
+    
     Route::resource('twitters','TwittersController',['only' => ['store','destroy']]);
 });

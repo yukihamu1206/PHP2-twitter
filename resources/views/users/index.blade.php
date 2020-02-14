@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('usrs.users',['users' => $users])
+    @include('users.users',['users' => $users])
 @endsection
